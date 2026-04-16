@@ -6,20 +6,27 @@ import { getBitcoinPriceInXOF } from '../../src/services/cryptoService';
 import { Header } from '../../src/components/Headers';
 import { DashboardSchema } from '@/src/utils/validation';
 import { TransactionItem } from '../../src/components/TransactionItem';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function DashboardScreen() {
   const { theme, mode } = useTheme();
   const [btcPrice, setBtcPrice] = useState(0);
   const [loading, setLoading] = useState(true);
 
+
+  const [transactions, setTransactions] = useState([
+  { id: 1, type: 'retrait_mtn', amount: '15 000', date: '14:30', status: 'terminé' },
+  { id: 2, type: 'depot_btc', amount: '45 000', date: 'Hier', status: 'terminé' },
+]);
+
 const fetchPrice = async () => {
   try {
     setLoading(true);
     const price = await getBitcoinPriceInXOF();
     
-    // VALIDATION AVEC ZOD
+    /* --- API & Validation --- */
     const result = DashboardSchema.safeParse({
-      btcBalance: 0.5, // Ton solde fixe pour le test
+      btcBalance: 0.5, 
       btcPrice: price
     });
 
@@ -62,18 +69,53 @@ const fetchPrice = async () => {
     </TouchableOpacity>
   </View>
 
-  {/* Simulation de liste */}
-  <TransactionItem type="retrait" amount="15 000" date="Aujourd'hui, 14:30" status="terminé" />
-  <TransactionItem type="depot" amount="45 000" date="Hier, 09:15" status="terminé" />
+  {/* --- Composants Transactions --- */}
+  <TransactionItem type="retrait" amount="5 000" date="10:45" status="succès" />
+  <TransactionItem type="depot" amount="120 000" date="Hier" status="succès" />
+  <TransactionItem type="retrait" amount="2 500" date="Hier" status="succès" />
+  <TransactionItem type="frais_reseau" amount="450" date="09 Avril" status="terminé" />
+  <TransactionItem type="achat" amount="50 000" date="08 Avril" status="terminé" />
+  <TransactionItem type="transfert" amount="10 000" date="05 Avril" status="succès" />
+  <TransactionItem type="retrait" amount="5 000" date="10:45" status="succès" />
+  <TransactionItem type="depot" amount="120 000" date="Hier" status="succès" />
+  
 </View>
       </ScrollView>
+
+      {/* ======================================= */}
+      {/* COMPOSANT : Navigation (Tab Bar)        */}
+      {/* ======================================= */}
+      <View style={[styles.floatingTabBar, { backgroundColor: theme.surface, borderColor: 'rgba(150,150,150,0.1)' }]}>
+        <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
+          <Ionicons name="home" size={20} color={theme.primary} />
+          <Text style={[styles.tabLabel, { color: theme.primary }]}>Accueil</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
+          <Ionicons name="pie-chart" size={20} color={theme.textMuted} />
+          <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Marchés</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
+          <Ionicons name="wallet" size={20} color={theme.textMuted} />
+          <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Portefeuille</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
+          <Ionicons name="person" size={20} color={theme.textMuted} />
+          <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Profil</Text>
+        </TouchableOpacity>
+      </View>
+
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
-  container: { paddingBottom: 20 },
+  container: { paddingBottom: 130 }, 
+
+  /* --- SECTION HISTORIQUE --- */
   historySection: {
     paddingHorizontal: 20,
     marginTop: 20,
@@ -92,4 +134,33 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+
+  /* --- SECTION TAB BAR --- */
+  floatingTabBar: {
+    position: 'absolute',
+    bottom: 25,
+    left: 20,
+    right: 20,
+    height: 65,
+    borderRadius: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    elevation: 10,
+  },
+  tabItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    marginTop: 4,
+  }
 });

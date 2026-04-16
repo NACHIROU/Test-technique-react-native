@@ -15,6 +15,15 @@ export const WithdrawSchema = z.object({
     
 });
 
-// Extraire les types
+export const TransactionTypeEnum = z.enum([
+  'retrait', 
+  'depot', 
+  'achat_crypto', 
+  'paiement_facture',
+  'transfert_interne'
+]);
+
+// Extraction des types
 export type DashboardData = z.infer<typeof DashboardSchema>;
 export type WithdrawData = z.infer<typeof WithdrawSchema>;
+export type TransactionType = z.infer<typeof TransactionTypeEnum>;

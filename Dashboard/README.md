@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+# Crypto Dashboard Challenge 📱💰
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bienvenue sur le projet Crypto Dashboard ! Ce dépôt contient une application React Native (construite avec Expo) démontrant la gestion de portefeuilles crypto, le suivi des prix (Bitcoin) en temps réel, un design premium adaptatif (Clair/Sombre) et une modélisation poussée des interfaces de retrait d'argent (Mobile Money).
 
-## Get started
+---
 
-1. Install dependencies
+## 🛠 Technologies utilisées
 
-   ```bash
-   npm install
-   ```
+Ce projet s'appuie sur une pile technique moderne et robuste pour garantir performance, sécurité et maintenabilité :
 
-2. Start the app
+- **React Native & Expo** : Cœur de l'application mobile multiplateformes (iOS et Android).
+- **TypeScript** : Typage statique strict garantissant la réduction des bugs relatifs aux propriétés et états.
+- **Expo Router (`app/`)** : Architecture de routing basée sur le système de fichiers (File-based routing), offrant une navigation fluide et similaire au Next.js pour fluidifier le développement.
+- **Zod** : Validation robuste des schémas de données. Utilisé spécifiquement pour valider les données de l'API externe (comme les prix du Bitcoin) avant de les injecter dans l'application.
+- **React Context API** : Système de gestion globale d'état léger pour contrôler le mode Clair/Sombre dynamiquement à la volée.
+- **StyleSheet & Animations** : Design "Flat/Premium" totalement personnalisé, incluant des contraintes poussées sur le clavier (`KeyboardAvoidingView`), les barres de progression, et l'API `Animated` pour sublimer l'expérience utilisateur.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🚀 Procédure d'installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Afin de pouvoir faire tourner le projet localement sur votre machine, assurez-vous d'avoir [Node.js](https://nodejs.org/) installé, puis suivez ces étapes :
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Cloner ou ouvrir le projet
+Si vous n'êtes pas déjà dans le répertoire :
 ```bash
-npm run reset-project
+git clone <url-du-repo>
+cd Test-technique-react-native/Dashboard
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Installer les dépendances
+Utilisez npm (ou yarn) pour installer l'intégralité des paquets nécessaires au fonctionnement du projet :
+```bash
+npm install
+```
 
-## Learn more
+### 3. Lancer le serveur de développement Expo
+Démarrez l'application localement à l'aide de la commande suivante :
+```bash
+npx expo start
+```
+*(ou `npm start`)*
 
-To learn more about developing your project with Expo, look at the following resources:
+### 4. Visualiser l'application
+Une fois le serveur lancé, de multiples options s'offriront à vous via le terminal :
+- **Sur votre propre téléphone (Recommandé)** : Installez l'application **Expo Go** (iOS / Android) puis scannez le QR code affiché dans votre terminal.
+- **Sur un Émulateur iOS** : Appuyez sur la touche `i` de votre clavier (nécessite Xcode d'installé).
+- **Sur un Émulateur Android** : Appuyez sur la touche `a` de votre clavier (nécessite Android Studio / un émulateur actif).
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 💡 Fonctionnalités Phares
 
-Join our community of developers creating universal apps.
+* **Basculement de thèmes** : Le mode Sombre / Clair est implémenté et agit globalement sur toutes les vues de l'application instantanément sans besoin de rechargement.
+* **Architecture modulaire** : Les styles (CSS React Native) très denses sont soigneusement extraits (`*.styles.ts`) pour rendre le JSX épuré et facile à modifier.
+* **UX Premium (Retrait)** : L'écran de retrait dispose d'un simulateur de frais automatique (2%), d'une liste de sélection d'opérateur mobile native et moderne (Mtn / Moov) façon Apple Pay/Revolut, avec validation dynamique à l'écran. 
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+Réalisé avec passion. 🚀
