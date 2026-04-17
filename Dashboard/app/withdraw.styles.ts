@@ -13,16 +13,16 @@ export const styles = StyleSheet.create({
   headerContainer: { 
     paddingTop: 50, 
     paddingHorizontal: 20,
-    paddingBottom: 15,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255,255,255,0.05)',
     zIndex: 10,
   },
-  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 15 },
+  header: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
   backButton: { marginRight: 15, padding: 4 },
   title: { fontSize: 22, fontWeight: '800' },
   
-  stepperContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10, paddingHorizontal: 10 },
+  stepperContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 5, paddingHorizontal: 10 },
   step: { alignItems: 'center', flex: 1 },
   stepCircle: { width: 32, height: 32, borderRadius: 16, justifyContent: 'center', alignItems: 'center', marginBottom: 6 },
   stepNumber: { fontSize: 14, fontWeight: '800' },
@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 16,
+    padding: 12,
     borderRadius: 16,
     borderWidth: 1.5,
   },
@@ -67,14 +67,14 @@ export const styles = StyleSheet.create({
   /* ========================================= */
   /* GROUPES D'ENTRÉE DU FORMULAIRE DE RETRAIT */
   /* ========================================= */
-  formSection: { marginTop: 30, paddingHorizontal: 10 },
+  formSection: { marginTop: 15, paddingHorizontal: 10 },
   inputWrapper: {
-    marginBottom: 20,
+    marginBottom: 10,
   },
   minimalInputGroup: { 
     borderWidth: 1, 
     borderRadius: 14,
-    padding: 14,
+    padding: 12,
   },
   minimalLabel: { 
     fontSize: 13, 
@@ -91,18 +91,38 @@ export const styles = StyleSheet.create({
   /* ========================================= */
   /* BOUTON DE SOUMISSION DU FORMULAIRE        */
   /* ========================================= */
-  submitButton: { padding: 18, borderRadius: 16, alignItems: 'center', marginTop: 30 },
+  submitButton: { padding: 16, borderRadius: 16, alignItems: 'center', marginTop: 15 },
   submitText: { fontSize: 16, fontWeight: '700' },
 
   /* ========================================= */
-  /* MODALE PREMIUM DE VALIDATION              */
+  /* MODALE PREMIUM (Design Bottom Sheet Fintech)*/
   /* ========================================= */
-  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center', padding: 20 },
-  modalPremium: { width: '100%', padding: 25, borderRadius: 28, alignItems: 'center', overflow: 'hidden' },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
+  modalPremium: { 
+    width: '100%', 
+    borderTopLeftRadius: 32, 
+    borderTopRightRadius: 32, 
+    paddingTop: 12, 
+    paddingBottom: 40,
+    alignItems: 'center', 
+    overflow: 'hidden' 
+  },
+  modalHandle: { width: 40, height: 5, backgroundColor: 'rgba(150,150,150,0.3)', borderRadius: 3, marginBottom: 20 },
+  modalPremiumTitle: { fontSize: 20, fontWeight: '800', marginBottom: 20, textAlign: 'center' },
+  modalBody: { paddingHorizontal: 25, paddingBottom: 25, width: '100%' },
+  
+  detailRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: 'rgba(150,150,150,0.1)' },
+  detailLabel: { fontSize: 14, fontWeight: '500' },
+  detailValue: { fontSize: 14, fontWeight: '700', textAlign: 'right', flexShrink: 1, marginLeft: 20 },
+
+  modalActionsColumn: { width: '100%', paddingHorizontal: 25, gap: 12 },
+  modalActionBtnPrimary: { width: '100%', paddingVertical: 18, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
+  modalActionBtnSecondary: { width: '100%', paddingVertical: 18, borderRadius: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(150,150,150,0.1)' },
+  modalActionTextPrimary: { fontWeight: '700', fontSize: 16 },
+  modalActionTextSecondary: { fontWeight: '700', fontSize: 16 },
+  
+  // Succès
   iconCircleWrapper: { marginBottom: 20 },
   iconCircle: { width: 80, height: 80, borderRadius: 40, justifyContent: 'center', alignItems: 'center' },
-  modalPremiumTitle: { fontSize: 22, fontWeight: '800', marginBottom: 15, textAlign: 'center' },
-  modalBody: { width: '100%', backgroundColor: 'rgba(0,0,0,0.15)', padding: 15, borderRadius: 16, marginBottom: 25 },
-  modalPremiumDesc: { fontSize: 15, lineHeight: 22, textAlign: 'center' },
-  modalCloseBtn: { width: '100%', paddingVertical: 16, borderRadius: 16, alignItems: 'center' }
+  modalPremiumDesc: { fontSize: 15, lineHeight: 22, textAlign: 'center' }
 });

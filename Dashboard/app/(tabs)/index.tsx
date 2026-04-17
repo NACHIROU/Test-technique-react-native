@@ -62,22 +62,23 @@ const fetchPrice = async () => {
     <Text style={[styles.historyTitle, { color: theme.text }]}>
       Activités récentes
     </Text>
-    <TouchableOpacity>
-      <Text style={[styles.viewAllText, { color: theme.primary }]}>
+    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text style={[styles.viewAllText, { color: theme.primary, marginRight: 2 }]}>
         Voir tout
       </Text>
+      <Ionicons name="chevron-forward" size={14} color={theme.primary} />
     </TouchableOpacity>
   </View>
 
   {/* --- Composants Transactions --- */}
-  <TransactionItem type="retrait" amount="5 000" date="10:45" status="succès" />
-  <TransactionItem type="depot" amount="120 000" date="Hier" status="succès" />
-  <TransactionItem type="retrait" amount="2 500" date="Hier" status="succès" />
-  <TransactionItem type="frais_reseau" amount="450" date="09 Avril" status="terminé" />
-  <TransactionItem type="achat" amount="50 000" date="08 Avril" status="terminé" />
-  <TransactionItem type="transfert" amount="10 000" date="05 Avril" status="succès" />
-  <TransactionItem type="retrait" amount="5 000" date="10:45" status="succès" />
-  <TransactionItem type="depot" amount="120 000" date="Hier" status="succès" />
+  <TransactionItem type="retrait" amount="5 000" date="Aujourd'hui, 10:45" status="succès" />
+  <TransactionItem type="depot" amount="120 000" date="Aujourd'hui, 09:12" status="succès" />
+  <TransactionItem type="retrait" amount="2 500" date="Hier, 18:30" status="succès" />
+  <TransactionItem type="frais_reseau" amount="450" date="Hier, 18:30" status="terminé" />
+  <TransactionItem type="achat" amount="7 500" date="14 Avril, 08:15" status="terminé" />
+  <TransactionItem type="depot" amount="15 000" date="12 Avril, 15:45" status="succès" />
+  <TransactionItem type="achat" amount="50 000" date="12 Avril, 14:00" status="terminé" />
+  <TransactionItem type="transfert" amount="10 000" date="10 Avril, 11:20" status="succès" />
   
 </View>
       </ScrollView>
@@ -92,17 +93,17 @@ const fetchPrice = async () => {
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
-          <Ionicons name="pie-chart" size={20} color={theme.textMuted} />
+          <Ionicons name="pie-chart-outline" size={20} color={theme.textMuted} />
           <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Marchés</Text>
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
-          <Ionicons name="wallet" size={20} color={theme.textMuted} />
+          <Ionicons name="wallet-outline" size={20} color={theme.textMuted} />
           <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Portefeuille</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.tabItem} activeOpacity={0.7}>
-          <Ionicons name="person" size={20} color={theme.textMuted} />
+          <Ionicons name="person-outline" size={20} color={theme.textMuted} />
           <Text style={[styles.tabLabel, { color: theme.textMuted }]}>Profil</Text>
         </TouchableOpacity>
       </View>
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   /* --- SECTION HISTORIQUE --- */
   historySection: {
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 32,
   },
   historyHeader: {
     flexDirection: 'row',
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
   },
   historyTitle: {
     fontSize: 18,
-    fontWeight: '800',
+    fontWeight: '500',
   },
   viewAllText: {
     fontSize: 14,

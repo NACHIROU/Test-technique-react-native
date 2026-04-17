@@ -17,7 +17,8 @@ export default function WithdrawScreen() {
   const [confirmPhone, setConfirmPhone] = useState('');
   
   // Modale
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMode, setModalMode] = useState<'confirm' | 'success'>('confirm');
 
   // --- LOGIQUE DE CALCUL BIDIRECTIONNEL ---
   const handleAmountChange = (val: string) => {
@@ -50,7 +51,7 @@ export default function WithdrawScreen() {
 
   // Calcul de la barre de progression circulaire
   let currentStep = 1;
-  if (isProcessing) {
+  if (modalVisible) {
     currentStep = 3; // Validation finale
   } else if (provider) {
     currentStep = 2; // Formulaire affiché
@@ -58,7 +59,8 @@ export default function WithdrawScreen() {
 
   const onSubmit = () => {
     if (!canSubmit) return;
-    setIsProcessing(true);
+    setModalMode('confirm');
+    setModalVisible(true);
   };
 
   return (
@@ -106,7 +108,7 @@ export default function WithdrawScreen() {
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         
         {/* ÉTAPE 1: CHOIX OPÉRATEUR (Design Premium Revolut-style) */}
         <Text style={[styles.sectionTitle, { color: theme.text }]}>Méthode de retrait</Text>
@@ -198,7 +200,7 @@ export default function WithdrawScreen() {
 
             {/* NUMÉROS */}
             <View style={[styles.inputWrapper, { marginTop: 5 }]}>
-              <Text style={[styles.minimalLabel, { color: theme.text, opacity: 0.8 }]}>Numéro de réception</Text>
+              <Text style={[styles.minimalLabel, { color: theme.text, opacity: 0.8 }]}>Numéro</Text>
               <View style={[styles.minimalInputGroup, { borderColor: theme.textMuted }]}>
                 <TextInput
                   style={[styles.minimalInput, { color: theme.text }]}
@@ -253,34 +255,76 @@ export default function WithdrawScreen() {
         )}
       </ScrollView>
 
-      {/* MODALE DE SUCCÈS PREMIUM */}
-      <Modal visible={isProcessing} transparent={true} animationType="fade">
+      {/* MODALE - BOTTOM SHEET PREMIUM (Fintech Style) */}
+      <Modal visible={modalVisible} transparent={true} animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalPremium, { backgroundColor: theme.surface }]}>
+            <View style={styles.modalHandle} />
             
-            <View style={styles.iconCircleWrapper}>
-              <View style={[styles.iconCircle, { backgroundColor: 'rgba(34, 197, 94, 0.15)' }]}>
-                <Ionicons name="checkmark-done" size={40} color="#22C55E" />
-              </View>
-            </View>
+            {modalMode === 'confirm' ? (
+              <>
+                <Text style={[styles.modalPremiumTitle, { color: theme.text }]}>Confirmation</Text>
+                
+                <View style={styles.modalBody}>
+                  <View style={styles.detailRow}>
+                    <Text style={[styles.detailLabel, { color: theme.textMuted }]}>Montant</Text>
+                    <Text style={[styles.detailValue, { color: theme.text }]}>{amount} FCFA</Text>
+                  </View>
+                  <View style={styles.detailRow}>
+                    <Text style={[styles.detailLabel, { color: theme.textMuted }]}>Bénéficiaire</Text>
+                    <Text style={[styles.detailValue, { color: theme.text }]}>Somad Oluwanicheola Tobi NACHIROU</Text>
+                  </View>
+                  <View style={[styles.detailRow, { borderBottomWidth: 0 }]}>
+                    <Text style={[styles.detailLabel, { color: theme.textMuted }]}>Opérateur</Text>
+                    <Text style={[styles.detailValue, { color: theme.text }]}>{provider} ({phoneNumber})</Text>
+                  </View>
+                </View>
 
-            <Text style={[styles.modalPremiumTitle, { color: theme.text }]}>Demande enregistrée !</Text>
-            
-            <View style={styles.modalBody}>
-               <Text style={[styles.modalPremiumDesc, { color: theme.textMuted }]}>
-                  Votre retrait de <Text style={{fontWeight: '700', color: theme.text}}>{amount} FCFA</Text> vers le <Text style={{fontWeight: '700', color: theme.text}}>{phoneNumber}</Text> ({provider}) a été pris en compte.
-               </Text>
-               <Text style={[styles.modalPremiumDesc, { color: theme.textMuted, marginTop: 15 }]}>
-                  Il est actuellement <Text style={{fontWeight: '600', color: theme.primary}}>en cours de traitement</Text> par l'opérateur et sera validé sous peu.
-               </Text>
-            </View>
+                <View style={styles.modalActionsColumn}>
+                  <TouchableOpacity 
+                    style={[styles.modalActionBtnPrimary, { backgroundColor: theme.primary }]}
+                    onPress={() => setModalMode('success')}
+                  >
+                    <Text style={[styles.modalActionTextPrimary, { color: '#0F172A' }]}>Valider le retrait</Text>
+                  </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={[styles.modalCloseBtn, { backgroundColor: theme.primary }]}
-              onPress={() => { setIsProcessing(false); router.replace('/(tabs)'); }}
-            >
-              <Text style={{ color: theme.background, fontWeight: '700', fontSize: 16 }}>Fermer et retourner à l'accueil</Text>
-            </TouchableOpacity>
+                  <TouchableOpacity 
+                    style={styles.modalActionBtnSecondary}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Text style={[styles.modalActionTextSecondary, { color: theme.text }]}>Annuler</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+              <>
+                <View style={styles.iconCircleWrapper}>
+                  <View style={[styles.iconCircle, { backgroundColor: 'rgba(34, 197, 94, 0.15)' }]}>
+                    <Ionicons name="checkmark-done" size={40} color="#22C55E" />
+                  </View>
+                </View>
+
+                <Text style={[styles.modalPremiumTitle, { color: theme.text }]}>Demande traitée</Text>
+                
+                <View style={[styles.modalBody, { alignItems: 'center' }]}>
+                   <Text style={[styles.modalPremiumDesc, { color: theme.text, marginBottom: 8 }]}>
+                      Votre retrait a bien été pris en compte.
+                   </Text>
+                   <Text style={[styles.modalPremiumDesc, { color: theme.textMuted }]}>
+                      Il est en cours de traitement par l'opérateur et sera validé sous peu.
+                   </Text>
+                </View>
+
+                <View style={styles.modalActionsColumn}>
+                  <TouchableOpacity 
+                    style={[styles.modalActionBtnPrimary, { backgroundColor: theme.primary }]}
+                    onPress={() => { setModalVisible(false); router.replace('/(tabs)'); }}
+                  >
+                    <Text style={[styles.modalActionTextPrimary, { color: '#0F172A' }]}>Retour à l'accueil</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
 
           </View>
         </View>

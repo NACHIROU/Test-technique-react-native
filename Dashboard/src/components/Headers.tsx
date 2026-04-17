@@ -12,10 +12,10 @@ export const Header = () => {
       <View style={styles.userInfo}>
         {/* L'Avatar devient cliquable */}
         <TouchableOpacity 
-          style={[styles.avatar, { backgroundColor: theme.surface }]}
+          style={[styles.avatar, { borderWidth: 1, borderColor: mode === 'light' ? '#0F172A' : theme.textMuted + '33' }]}
           onPress={() => setMenuVisible(true)}
         >
-           <Ionicons name="person" size={20} color={theme.primary} />
+           <Ionicons name="person-outline" size={24} color={theme.textMuted} />
         </TouchableOpacity>
         
         <View style={styles.textContainer}>
@@ -67,8 +67,10 @@ export const Header = () => {
         </TouchableWithoutFeedback>
       </Modal>
 
-      <TouchableOpacity style={[styles.iconButton, { borderColor: theme.textMuted + '33' }]}>
-        <Ionicons name="notifications-outline" size={24} color={theme.text} />
+      <TouchableOpacity style={styles.iconButton}>
+        <Ionicons name="notifications-outline" size={24} color={theme.textMuted} />
+        {/* Badge de Notification Rouge */}
+        <View style={[styles.notificationBadge, { borderColor: theme.background }]} />
       </TouchableOpacity>
     </View>
   );
@@ -95,7 +97,17 @@ const styles = StyleSheet.create({
   textContainer: { justifyContent: 'center' },
   welcomeText: { fontSize: 12, fontWeight: '500' },
   userName: { fontSize: 16, fontWeight: '700' },
-  iconButton: { padding: 10, borderRadius: 12, borderWidth: 1 },
+  iconButton: { padding: 5, justifyContent: 'center', alignItems: 'center', position: 'relative' },
+  notificationBadge: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#EF4444', // Rouge vif
+    borderWidth: 1.5,
+  },
   
   // Styles de la Modale Menu
   modalOverlay: {

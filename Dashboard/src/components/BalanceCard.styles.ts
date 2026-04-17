@@ -40,6 +40,17 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: 'rgba(255,255,255,0.05)',
   },
+  
+  trendBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  trendText: {
+    color: '#065F46', // Vert très foncé
+    fontSize: 13,
+    fontWeight: '800',
+    marginLeft: 2,
+  },
 
   /* ========================================= */
   /* ORGANISATION DU CONTENU HAUT ET MILIEU    */
@@ -67,7 +78,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1.5,
     opacity: 0.9,
   },
   amountContainer: {
@@ -150,26 +161,23 @@ export const styles = StyleSheet.create({
   actionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    gap: 8,
     paddingTop: 16,
     marginTop: 12,
     borderTopWidth: 1,
     borderTopColor: 'rgba(255,255,255,0.15)',
   },
-  actionButton: {
-    alignItems: 'center',
+  ctaButton: {
     flex: 1,
-  },
-  actionIconContainer: {
-    backgroundColor: '#FFFFFF',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    justifyContent: 'center',
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    justifyContent: 'center',
+    paddingVertical: 12,
+    borderRadius: 12,
+    gap: 6,
   },
-  actionText: {
-    fontSize: 12,
-    fontWeight: '600',
+  ctaText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
 });

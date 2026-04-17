@@ -15,9 +15,9 @@ export const Themes ={
     },
     light: {
         ...commonColors,
-        background: '#F8FAFC',
+        background: '#F1F5F9', // Gris clair doux
         surface: '#FFFFFF',
         text: '#0F172A',
-        textMuted: '#64748B',
+        textMuted: '#475569', // Gris plus sombre pour contraste lisible
     },
 };
